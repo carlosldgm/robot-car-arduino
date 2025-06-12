@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Ignorar archivos de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Ignorar script de instalación de pip
+get-pip.py
