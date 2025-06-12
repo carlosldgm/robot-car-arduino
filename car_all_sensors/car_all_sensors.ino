@@ -51,11 +51,11 @@ void loop() {
         Serial.println("Dirección: Adelante");
         break;
         
-      case 'r': // Atrás
+      case 'b': // Atrás
         digitalWrite(pinIN1_l, LOW);
         digitalWrite(pinIN2_l, HIGH);
-        digitalWrite(pinIN1_r, HIGH);
-        digitalWrite(pinIN2_r, LOW);        
+        digitalWrite(pinIN1_r, LOW);
+        digitalWrite(pinIN2_r, HIGH);        
         Serial.println("Dirección: Atrás");
         break;
         
@@ -67,23 +67,25 @@ void loop() {
         Serial.println("Motores detenidos");
         break;
         
-      case 'l': // Izquierda (Girar izquierda (motor derecho avanza, izquierdo detenido))
-        digitalWrite(pinIN1_l, LOW);
-        digitalWrite(pinIN2_l, LOW);
+      case 'l': // Izquierda (Girar izquierda (motor derecho avanza, izquierdo atras))
+        //motor derecho avanza
         digitalWrite(pinIN1_r, HIGH);
-        digitalWrite(pinIN2_r, LOW);        
+        digitalWrite(pinIN2_r, LOW);  
+        //motor izq retrocede    
+        digitalWrite(pinIN1_l, LOW);
+        digitalWrite(pinIN2_l, HIGH);       
         Serial.println("Girando Izquierda");
         break;
 
-      case 'd': // Girar derecha (motor izquierdo avanza, derecho detenido)
+      case 'r': // Girar derecha (motor izquierdo avanza, derecho retrocede)
+        //motor izquierdo avanza
         digitalWrite(pinIN1_l, HIGH);
         digitalWrite(pinIN2_l, LOW);
+        //motor derecho retrocede
         digitalWrite(pinIN1_r, LOW);
-        digitalWrite(pinIN1_r, LOW);
+        digitalWrite(pinIN2_r, HIGH);   
         Serial.println("Girando derecha");
         break;        
-
-
 
       case '0'...'9': // Ajustar velocidad
         // Convertir el carácter a un valor entre 0 y 255
@@ -92,16 +94,7 @@ void loop() {
         analogWrite(pinEN_r, speed);
         Serial.print("Velocidad ajustada a: ");
         Serial.println(speed);
-        break;
-
-      case 'p': // Adelante (mueve ambos motores)
-        digitalWrite(pinIN1_r, HIGH);
-        digitalWrite(pinIN2_r, LOW);
-        Serial.println("Dirección: Adelante");
-        analogWrite(pinEN_r, speed);
-        Serial.print("Prueba rueda l: ");
-        Serial.println(speed);
-        break;        
+        break;     
     }
   }
 }
