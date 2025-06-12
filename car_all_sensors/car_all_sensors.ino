@@ -16,7 +16,7 @@ const int pinIN2_r = 9;    // Controla la dirección motor der(sentido)
 const int pinEN_r = 10;    // Controla la velocidad motor der(PWM)
 
 // Variable para almacenar la velocidad actual
-int speed = 150;  // Velocidad media por defecto (rango 0-255)
+int speed = 120;  // Velocidad media por defecto (rango 0-255)
 
 void setup() {
   // Inicializa comunicación con la PC (Monitor Serial)
@@ -40,9 +40,9 @@ void setup() {
   Serial.println("Sistema listo - Control via Bluetooth habilitado");
   Serial.println("Comandos disponibles:");
   Serial.println("f - Mover hacia adelante");
-  Serial.println("r - Mover hacia atrás");
-  Serial.println("d - Girar a la derecha");
-  Serial.println("i - Girar a la izquierda");
+  Serial.println("b - Mover hacia atrás");
+  Serial.println("r - Girar a la derecha");
+  Serial.println("l - Girar a la izquierda");
   Serial.println("s - Detener motores");
   Serial.println("0-9 - Ajustar velocidad (0=min, 9=max)");
 }
@@ -78,7 +78,7 @@ void executeCommand(char command) {
       Serial.println("Dirección: Adelante");
       break;
       
-    case 'r': // Atrás
+    case 'b': // Atrás
       digitalWrite(pinIN1_l, LOW);
       digitalWrite(pinIN2_l, HIGH);
       digitalWrite(pinIN1_r, LOW);
@@ -92,7 +92,7 @@ void executeCommand(char command) {
       Serial.println("Motores detenidos");
       break;
       
-    case 'i': // Izquierda
+    case 'l': // Izquierda
       // Motor izquierdo atrás, motor derecho adelante
       digitalWrite(pinIN1_l, LOW);
       digitalWrite(pinIN2_l, HIGH);
@@ -102,7 +102,7 @@ void executeCommand(char command) {
       Serial.println("Girando Izquierda");
       break;
 
-    case 'd': // Derecha
+    case 'r': // Derecha
       // Motor izquierdo adelante, motor derecho atrás
       digitalWrite(pinIN1_l, HIGH);
       digitalWrite(pinIN2_l, LOW);
